@@ -18,8 +18,14 @@ dependencies {
 task compileCPP() {
     doLast {
         exec {
-            workingDir "$project.projectDir/native"
-            commandLine "cmake", "--build", "$project.projectDir/native/cmake-build-debug"
+            workingDir "$project.projectDir"
+            commandLine "cmake", "$project.projectDir/native"
+            standardOutput = System.out
+        }
+
+        exec {
+            workingDir "$project.projectDir"
+            commandLine "cmake","$project.projectDir/native", "--build", "$project.projectDir/build"
             standardOutput = System.out
         }
 
