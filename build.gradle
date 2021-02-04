@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+
+task compileCPP() {
+    doLast {
+        exec {
+            workingDir "$project.projectDir/native"
+            commandLine "cmake", "--build", "$project.projectDir/native/cmake-build-debug"
+            standardOutput = System.out
+        }
+
+    }
+
+}
+build.finalizedBy(compileCPP)
+
+test {
+    useJUnitPlatform()
+}
