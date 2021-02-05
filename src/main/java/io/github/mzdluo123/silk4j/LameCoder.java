@@ -1,6 +1,7 @@
 package io.github.mzdluo123.silk4j;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class LameCoder {
 
@@ -14,29 +15,44 @@ public class LameCoder {
     }
 
 
-
     private void initialize(LameBuilder builder) {
         initialize(builder.inSampleRate, builder.outChannel, builder.outSampleRate,
                 builder.outBitrate, builder.scaleInput, getIntForMode(builder.mode), getIntForVbrMode(builder.vbrMode), builder.quality, builder.vbrQuality, builder.abrMeanBitrate,
                 builder.lowpassFreq, builder.highpassFreq, builder.id3tagTitle, builder.id3tagArtist,
                 builder.id3tagAlbum, builder.id3tagYear, builder.id3tagComment);
     }
-
-    public int encode(short[] buffer_l, short[] buffer_r,
-                      int samples, byte[] mp3buf) {
-
-        return lameEncode(buffer_l, buffer_r, samples, mp3buf);
-    }
-
-
-    public int flush(byte[] mp3buf) {
-        return lameFlush(mp3buf);
-    }
+//
+//    public int encode(short[] buffer_l, short[] buffer_r,
+//                      int samples, byte[] mp3buf) {
+//
+//        return lameEncode(buffer_l, buffer_r, samples, mp3buf);
+//    }
+//
+//    public int encodeBufferInterLeaved(short[] pcm, int samples,
+//                                       byte[] mp3buf) {
+//        return encodeBufferInterleaved(pcm, samples, mp3buf);
+//    }
+//
+//    public int flush(byte[] mp3buf) {
+//        return lameFlush(mp3buf);
+//    }
 
     public void close() {
         lameClose();
     }
 
+    public static void encode(String source, String dest) throws IOException {
+
+        LameCoder coder = new LameBuilder()
+                .setInSampleRate(16000)
+                .setOutChannels(1)
+                .setOutBitrate(48)
+                .setOutSampleRate(16000)
+                .setQuality(8)
+                .build();
+        encodeFile(source,dest);
+        coder.close();
+    }
 
     private static native void initializeDefault();
 
@@ -46,18 +62,20 @@ public class LameCoder {
                                           String id3tagArtist, String id3tagAlbum, String id3tagYear,
                                           String id3tagComment);
 
-    private native static int lameEncode(short[] buffer_l, short[] buffer_r,
-                                         int samples, byte[] mp3buf);
-
-
-    private native static int encodeBufferInterleaved(short[] pcm, int samples,
-                                                      byte[] mp3buf);
-
-
-    private native static int lameFlush(byte[] mp3buf);
+//    private native static int lameEncode(short[] buffer_l, short[] buffer_r,
+//                                         int samples, byte[] mp3buf);
+//
+//
+//    private native static int encodeBufferInterleaved(short[] pcm, int samples,
+//                                                      byte[] mp3buf);
+//
+//
+//    private native static int lameFlush(byte[] mp3buf);
 
 
     private native static void lameClose();
+
+    private native static void encodeFile(String source,String dest);
 
 
     ////UTILS

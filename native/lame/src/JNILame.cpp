@@ -3,9 +3,24 @@
 //
 
 #include "JNILame.h"
-
+#define BUFFER_SIZE 8192
+#define be_short(s) ((short) ((unsigned short) (s) << 8) | ((unsigned short) (s) >> 8))
 
 lame_global_flags *glf;
+
+
+int read_samples(FILE *input_file, short *input) {
+    int nb_read;
+    nb_read = fread(input, 1, sizeof(short), input_file) / sizeof(short);
+
+//    int i = 0;
+//    while (i < nb_read) {
+//        input[i] = be_short(input[i]);
+//        i++;
+//    }
+
+    return nb_read;
+}
 
 JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_initializeDefault(
         JNIEnv *env, jclass cls) {
@@ -49,6 +64,44 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_lameClose(
         JNIEnv *env, jclass cls) {
     close(glf);
 }
+
+JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_encodeFile
+        (JNIEnv *env,
+         jclass cls, jstring in_source_path, jstring in_target_path){
+
+    const char *source_path, *target_path;
+    source_path = env->GetStringUTFChars( in_source_path, NULL);
+    target_path = env->GetStringUTFChars( in_target_path, NULL);
+
+    FILE *input_file, *output_file;
+    input_file = fopen(source_path, "rb");
+    output_file = fopen(target_path, "wb");
+
+    short input[BUFFER_SIZE];
+    unsigned char output[BUFFER_SIZE];
+    int nb_read = 0;
+    int nb_write = 0;
+    int nb_total = 0;
+
+//	LOGD("Encoding started");
+    nb_read = read_samples(input_file, input);
+    while (nb_read) {
+        nb_write = lame_encode_buffer(glf, input, input, nb_read, output,
+                                      BUFFER_SIZE);
+        fwrite(output, nb_write, 1, output_file);
+        nb_total += nb_write;
+        nb_read = read_samples(input_file, input);
+    }
+//	LOGD("Encoded %d bytes", nb_total);
+
+    nb_write = lame_encode_flush(glf, output, BUFFER_SIZE);
+    fwrite(output, nb_write, 1, output_file);
+//	LOGD("Flushed %d bytes", nb_write);
+
+    fclose(input_file);
+    fclose(output_file);
+}
+
 
 
 lame_global_flags *initializeDefault(JNIEnv *env) {
@@ -181,7 +234,8 @@ jint encode(
     const jsize mp3buf_size = env->GetArrayLength( mp3buf);
     jbyte *j_mp3buf = env->GetByteArrayElements( mp3buf, NULL);
 
-    int result = lame_encode_buffer(glf, j_buffer_l, j_buffer_r,
+    int result = lame_encode_buffer(glf, j_buffer_l,
+                                    j_buffer_r,
                                     samples, reinterpret_cast<unsigned char *>(j_mp3buf), mp3buf_size);
 
     env->ReleaseShortArrayElements( buffer_l, j_buffer_l, 0);

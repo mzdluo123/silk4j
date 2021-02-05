@@ -2,7 +2,6 @@ package io.github.mzdluo123.silk4j.test;
 
 import io.github.mzdluo123.silk4j.LameCoder;
 import io.github.mzdluo123.silk4j.SilkCoder;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -45,11 +44,11 @@ public class CoderTest {
 
     }
 
-//    @Test
-//    public void testEncodeMp3() throws IOException {
-//        LameCoder.encodeFile("out.pcm", "silk.mp3");
-//        File outFile = new File("silk.mp3");
-//        assertTrue(outFile.exists());
-//        outFile.delete();
-//    }
+    @Test
+    public void testEncodeMp3() throws IOException {
+        LameCoder.encode("out.pcm", "silk.mp3");
+        File outFile = new File("silk.mp3");
+        assertTrue(outFile.exists());
+
+    }
 }
