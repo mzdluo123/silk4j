@@ -22,7 +22,7 @@ public class CoderTest {
 
          dll = new File("native/cmake-build-debug/lame/liblame.dll");
         if (!dll.exists()) {
-            dll = new File("native/cmake-build-debug/liblame.so");
+            dll = new File("native/cmake-build-debug/lame/liblame.so");
         }
 
         System.load(dll.getAbsolutePath());
