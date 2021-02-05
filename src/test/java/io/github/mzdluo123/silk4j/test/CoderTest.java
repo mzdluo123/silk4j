@@ -51,4 +51,10 @@ public class CoderTest {
         assertTrue(outFile.exists());
 
     }
+    @Test
+    public void testDecodeMp3() throws IOException {
+        LameCoder.decode("silk.mp3", "decode.pcm");
+        File outFile = new File("decode.pcm");
+        assertTrue(outFile.exists());
+    }
 }

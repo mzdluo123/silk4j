@@ -33,7 +33,19 @@ public class LameBuilder {
     public String id3tagComment;
     public String id3tagYear;
 
+    public boolean isDecode() {
+        return isDecode;
+    }
+
+    public LameBuilder setDecode(boolean decode) {
+        isDecode = decode;
+        return this;
+    }
+
+    public boolean isDecode = false;
+
     public LameBuilder() {
+
 
         this.id3tagTitle = null;
         this.id3tagAlbum = null;

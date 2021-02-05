@@ -13,6 +13,7 @@ lame_global_flags *initializeDefault(
 
 lame_global_flags *initialize(
         JNIEnv *env,
+        jboolean isDecode,
         jint inSamplerate, jint outChannel,
         jint outSamplerate, jint outBitrate, jfloat scaleInput, jint mode, jint vbrMode,
         jint quality, jint vbrQuality, jint abrMeanBitrate, jint lowpassFreq, jint highpassFreq,

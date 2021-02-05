@@ -16,7 +16,7 @@ public class LameCoder {
 
 
     private void initialize(LameBuilder builder) {
-        initialize(builder.inSampleRate, builder.outChannel, builder.outSampleRate,
+        initialize(builder.isDecode, builder.inSampleRate, builder.outChannel, builder.outSampleRate,
                 builder.outBitrate, builder.scaleInput, getIntForMode(builder.mode), getIntForVbrMode(builder.vbrMode), builder.quality, builder.vbrQuality, builder.abrMeanBitrate,
                 builder.lowpassFreq, builder.highpassFreq, builder.id3tagTitle, builder.id3tagArtist,
                 builder.id3tagAlbum, builder.id3tagYear, builder.id3tagComment);
@@ -50,13 +50,25 @@ public class LameCoder {
                 .setOutSampleRate(16000)
                 .setQuality(8)
                 .build();
-        encodeFile(source,dest);
+        encodeFile(source, dest);
         coder.close();
     }
+    public static void decode(String source, String dest) throws IOException {
 
+        LameCoder coder = new LameBuilder()
+                .setDecode(true)
+                .setInSampleRate(16000)
+                .setOutChannels(1)
+                .setOutBitrate(48)
+                .setOutSampleRate(16000)
+                .setQuality(8)
+                .build();
+        encodeFile(source, dest);
+        coder.close();
+    }
     private static native void initializeDefault();
 
-    private static native void initialize(int inSamplerate, int outChannel,
+    private static native void initialize(boolean isDecode, int inSamplerate, int outChannel,
                                           int outSamplerate, int outBitrate, float scaleInput, int mode, int vbrMode,
                                           int quality, int vbrQuality, int abrMeanBitrate, int lowpassFreq, int highpassFreq, String id3tagTitle,
                                           String id3tagArtist, String id3tagAlbum, String id3tagYear,
@@ -75,7 +87,7 @@ public class LameCoder {
 
     private native static void lameClose();
 
-    private native static void encodeFile(String source,String dest);
+    private native static void encodeFile(String source, String dest);
 
 
     ////UTILS
