@@ -25,6 +25,14 @@ public class CoderTest {
         SilkCoder.decode("src/test/resources/77b18b66-e4d5-4847-8c44-cad582d75ad4.silk", "out.pcm");
         File outFile = new File("out.pcm");
         assertTrue(outFile.exists());
+    }
+
+    @Test
+    public void testEncode() {
+        SilkCoder.encode("out.pcm", "silk.amr");
+        File outFile = new File("silk.amr");
+        assertTrue(outFile.exists());
         outFile.delete();
+        new File("out.pcm").delete();
     }
 }

@@ -34,98 +34,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Silk decoder test program */
 /*****************************/
 
-#ifdef _WIN32
-#define _CRT_SECURE_NO_DEPRECATE    1
-#endif
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "SKP_Silk_SDK_API.h"
-#include "SKP_Silk_SigProc_FIX.h"
 #include "io_github_mzdluo123_silk4j_SilkCoder.h"
+#include "coder.h"
 
-/* Define codec specific settings should be moved to h file */
-#define MAX_BYTES_PER_FRAME     1024
-#define MAX_INPUT_FRAMES        5
-#define MAX_FRAME_LENGTH        480
-#define FRAME_LENGTH_MS         20
-#define MAX_API_FS_KHZ          48
-#define MAX_LBRR_DELAY          2
-
-#ifdef _SYSTEM_IS_BIG_ENDIAN
-/* Function to convert a little endian int16 to a */
-/* big endian int16 or vica verca                 */
-void swap_endian(
-    SKP_int16       vec[],
-    SKP_int         len
-)
-{
-    SKP_int i;
-    SKP_int16 tmp;
-    SKP_uint8 *p1, *p2;
-
-    for( i = 0; i < len; i++ ){
-        tmp = vec[ i ];
-        p1 = (SKP_uint8 *)&vec[ i ]; p2 = (SKP_uint8 *)&tmp;
-        p1[ 0 ] = p2[ 1 ]; p1[ 1 ] = p2[ 0 ];
-    }
-}
-#endif
-
-#if (defined(_WIN32) || defined(_WINCE))
-
-#include <windows.h>    /* timer */
-
-#else    // Linux or Mac
-#include <sys/time.h>
-#endif
-
-#ifdef _WIN32
-
-unsigned long GetHighResolutionTime() /* O: time in usec*/
-{
-    /* Returns a time counter in microsec	*/
-    /* the resolution is platform dependent */
-    /* but is typically 1.62 us resolution  */
-    LARGE_INTEGER lpPerformanceCount;
-    LARGE_INTEGER lpFrequency;
-    QueryPerformanceCounter(&lpPerformanceCount);
-    QueryPerformanceFrequency(&lpFrequency);
-    return (unsigned long) ((1000000 * (lpPerformanceCount.QuadPart)) / lpFrequency.QuadPart);
-}
-
-#else    // Linux or Mac
-unsigned long GetHighResolutionTime() /* O: time in usec*/
-{
-    struct timeval tv;
-    gettimeofday(&tv, 0);
-    return((tv.tv_sec*1000000)+(tv.tv_usec));
-}
-#endif // _WIN32
 
 /* Seed for the random number generator, which is used for simulating packet loss */
 static SKP_int32 rand_seed = 1;
-
-static void print_usage(char *argv[]) {
-    printf("\nVersion:20160922    Build By kn007 (kn007.net)");
-    printf("\nGithub: https://github.com/kn007/silk-v3-decoder\n");
-    printf("\nusage: %s in.bit out.pcm [settings]\n", argv[0]);
-    printf("\nin.bit       : Bitstream input to decoder");
-    printf("\nout.pcm      : Speech output from decoder");
-    printf("\n   settings:");
-    printf("\n-Fs_API <Hz> : Sampling rate of output signal in Hz; default: 24000");
-    printf("\n-loss <perc> : Simulated packet loss percentage (0-100); default: 0");
-    printf("\n-quiet       : Print out just some basic values");
-    printf("\n");
-}
 
 
 JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_decode
         (JNIEnv *env, jclass jclass1, jstring source, jstring dest, jint fs_hz, jint loss) {
 
     unsigned long tottime, starttime;
-
     size_t counter;
     SKP_int32  totPackets, i, k;
     SKP_int16 ret, len, tot_len;

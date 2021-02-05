@@ -25,7 +25,7 @@ include_directories(${JAVA_INCLUDE_PATH})
 include_directories(${JAVA_INCLUDE_PATH2})
 include_directories(${JAVA_AWT_INCLUDE_PATH})
 
-add_library(silk SHARED ${SRC_DIR} )
+add_library(silk SHARED ${SRC_DIR} bind/JNIEncoder.cpp bind/coder.h bind/coder.cpp)
 
 
 
