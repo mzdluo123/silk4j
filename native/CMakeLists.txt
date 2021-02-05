@@ -15,8 +15,10 @@ include_directories(src interface)
 
 include_directories(../build/generated/sources/headers/java/main/)
 
-# 加入REQUIRED 参数,如果找不到JNI,就报错退出
+set(JAVA_AWT_LIBRARY NotNeeded)
+set(JAVA_JVM_LIBRARY NotNeeded)
 find_package(JNI REQUIRED)
+
 # 加入jni支持
 include_directories(${JAVA_INCLUDE_PATH})
 include_directories(${JAVA_INCLUDE_PATH2})

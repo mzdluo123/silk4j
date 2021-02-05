@@ -127,7 +127,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_decode
     unsigned long tottime, starttime;
 
     size_t counter;
-    SKP_int32 args, totPackets, i, k;
+    SKP_int32  totPackets, i, k;
     SKP_int16 ret, len, tot_len;
     SKP_int16 nBytes;
     SKP_uint8 payload[MAX_BYTES_PER_FRAME * MAX_INPUT_FRAMES * (MAX_LBRR_DELAY + 1)];

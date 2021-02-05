@@ -17,18 +17,23 @@ dependencies {
 
 task compileCPP() {
     doLast {
+        mkdir("${projectDir}/native/cmake-build-debug")
         exec {
-            workingDir "$project.projectDir"
-            commandLine "cmake", "$project.projectDir/native"
+            workingDir "${projectDir}/native/cmake-build-debug"
+            commandLine "cmake", "-DCMAKE_BUILD_TYPE=Debug",  "${projectDir}/native"
             standardOutput = System.out
         }
 
         exec {
-            workingDir "$project.projectDir"
-            commandLine "cmake","$project.projectDir/native", "--build", "$project.projectDir/build"
+            workingDir "${projectDir}/native/cmake-build-debug"
+            commandLine "cmake", "-build", "${projectDir}/native/cmake-build-debug"
             standardOutput = System.out
         }
-
+        exec {
+            workingDir "${projectDir}/native/cmake-build-debug"
+            commandLine "make"
+            standardOutput = System.out
+        }
     }
 
 }
