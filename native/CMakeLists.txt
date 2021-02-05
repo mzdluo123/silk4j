@@ -3,7 +3,7 @@ project(native)
 
 set(CMAKE_CXX_STANDARD 14)
 
-SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../build/classes/java/main/io/github/mzdluo123/silk4j)
+#SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../build/classes/java/main/io/github/mzdluo123/silk4j)
 
 AUX_SOURCE_DIRECTORY(src SRC_DIR)
 
@@ -19,9 +19,11 @@ set(JAVA_AWT_LIBRARY NotNeeded)
 set(JAVA_JVM_LIBRARY NotNeeded)
 find_package(JNI REQUIRED)
 
+
 # 加入jni支持
 include_directories(${JAVA_INCLUDE_PATH})
 include_directories(${JAVA_INCLUDE_PATH2})
+include_directories(${JAVA_AWT_INCLUDE_PATH})
 
 add_library(silk SHARED ${SRC_DIR} )
 

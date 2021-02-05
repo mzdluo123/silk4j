@@ -9,7 +9,4 @@ public class SilkCoder {
         decode(source, dest, 24000, 0);
     }
 
-    static {
-        System.load(SilkCoder.class.getResource("libsilk.dll").getPath());
-    }
 }
