@@ -1,11 +1,13 @@
 package io.github.mzdluo123.silk4j.test;
 
+import io.github.mzdluo123.silk4j.LameCoder;
 import io.github.mzdluo123.silk4j.SilkCoder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,6 +17,13 @@ public class CoderTest {
         File dll = new File("native/cmake-build-debug/libsilk.dll");
         if (!dll.exists()) {
             dll = new File("native/cmake-build-debug/libsilk.so");
+        }
+
+        System.load(dll.getAbsolutePath());
+
+         dll = new File("native/cmake-build-debug/lame/liblame.dll");
+        if (!dll.exists()) {
+            dll = new File("native/cmake-build-debug/liblame.so");
         }
 
         System.load(dll.getAbsolutePath());
@@ -33,6 +42,14 @@ public class CoderTest {
         File outFile = new File("silk.amr");
         assertTrue(outFile.exists());
         outFile.delete();
-        new File("out.pcm").delete();
+
     }
+
+//    @Test
+//    public void testEncodeMp3() throws IOException {
+//        LameCoder.encodeFile("out.pcm", "silk.mp3");
+//        File outFile = new File("silk.mp3");
+//        assertTrue(outFile.exists());
+//        outFile.delete();
+//    }
 }
