@@ -16,20 +16,49 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Generate Headers
-        run: chmod +x gradlew && ./gradlew compileJava
+      - name: Run test
+        run: chmod +x gradlew && ./gradlew test
       - name: Add permission
         run: chmod +x cross/build.sh && chmod +x cross/setup_docker.sh
-#      - name: Build On linux-x64
-#        run: cross/build.sh
+
+      - name: Build On linux-x64
+          env:
+            CROSS: linux-x64
+          run: cross/setup_docker.sh
+
       - name: Build On android-arm64
         env:
           CROSS: android-arm64
         run: cross/setup_docker.sh
 
+      - name: Build On android-arm
+        env:
+          CROSS: android-arm
+        run: cross/setup_docker.sh
+
+      - name: Build On android-x86_64
+        env:
+          CROSS: android-x86_64
+        run: cross/setup_docker.sh
+
+      - name: Build On linux-arm64
+        env:
+          CROSS: linux-arm64
+        run: cross/setup_docker.sh
+
+      - name: Build On windows-x86
+        env:
+          CROSS: windows-shared-x86
+        run: cross/setup_docker.sh
+
+      - name: Build On windows-x64
+        env:
+          CROSS: windows-shared-x64
+        run: cross/setup_docker.sh
+
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: native
+          name: NativeLib
           path: |
             native/cmake-build-debug/Release
