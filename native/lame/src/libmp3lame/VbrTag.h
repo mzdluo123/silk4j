@@ -40,6 +40,8 @@
  */
 
 
+#include <stdint.h>
+
 #define FRAMES_FLAG     0x0001
 #define BYTES_FLAG      0x0002
 #define TOC_FLAG        0x0004

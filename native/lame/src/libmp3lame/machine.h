@@ -22,7 +22,7 @@
 #ifndef LAME_MACHINE_H
 #define LAME_MACHINE_H
 
-#include "version.h"
+#include "libmp3lame/version.h"
 
 #include <stdio.h>
 #include <assert.h>

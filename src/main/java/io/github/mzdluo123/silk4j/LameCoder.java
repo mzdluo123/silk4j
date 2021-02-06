@@ -55,16 +55,9 @@ public class LameCoder {
     }
     public static void decode(String source, String dest) throws IOException {
 
-        LameCoder coder = new LameBuilder()
-                .setDecode(true)
-                .setInSampleRate(16000)
-                .setOutChannels(1)
-                .setOutBitrate(48)
-                .setOutSampleRate(16000)
-                .setQuality(8)
-                .build();
-        encodeFile(source, dest);
-        coder.close();
+      initDecoder();
+      decodeFile(source,dest);
+      closeDecoder();
     }
     private static native void initializeDefault();
 
@@ -88,6 +81,12 @@ public class LameCoder {
     private native static void lameClose();
 
     private native static void encodeFile(String source, String dest);
+
+    private native static void initDecoder();
+
+    private native static void closeDecoder();
+
+    private native static void decodeFile(String source, String dest);
 
 
     ////UTILS
