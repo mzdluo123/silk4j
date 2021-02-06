@@ -41,7 +41,7 @@ jobs:
       - name: Build On linux-x64
         env:
           CROSS: linux-x64
-        uses: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build.yml
   build-android-arm64:
     needs: test
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
       - name: Build On android-arm64
         env:
           CROSS: android-arm64
-        uses: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build.yml
   build-android-arm:
     needs: test
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
       - name: Build On android-arm
         env:
           CROSS: android-arm
-        uses: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build.yml
   build-android-x86_64:
     needs: test
     runs-on: ubuntu-latest
@@ -68,7 +68,7 @@ jobs:
       - name: Build On android-x86_64
         env:
           CROSS: android-x86_64
-        uses: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build.yml
 
   build-linux-arm64:
     needs: test
@@ -78,7 +78,7 @@ jobs:
       - name: Build On linux-arm64
         env:
           CROSS: linux-arm64
-        uses: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build.yml
   build-windows-shared-x86:
     needs: test
     runs-on: ubuntu-latest
@@ -87,7 +87,7 @@ jobs:
       - name: Build On windows-shared-x86
         env:
           CROSS: windows-shared-x86
-        uses: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build.yml
   build-windows-shared-x64:
     needs: test
     runs-on: ubuntu-latest
@@ -96,5 +96,5 @@ jobs:
       - name: Build On windows-shared-x64
         env:
           CROSS: windows-shared-x64
-        uses: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build.yml
 
