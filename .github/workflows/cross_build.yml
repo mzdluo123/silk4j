@@ -1,0 +1,12 @@
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steeps:
+          - name: Build
+            run: cross/setup_docker.sh
+          - name: Archive NativeLib artifacts
+            uses: actions/upload-artifact@v2
+            with:
+              name: ${{env.CROSS}}
+              path: |
+                native/cmake-build-debug/Release

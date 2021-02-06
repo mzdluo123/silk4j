@@ -8,7 +8,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,54 +18,67 @@ jobs:
           java-version: 11
       - name: Run test
         run: chmod +x gradlew && ./gradlew test && ./gradlew jar
-      - name: Add permission
-        run: chmod +x cross/build.sh && chmod +x cross/setup_docker.sh
-
+      - name: Archive Jar artifacts
+          uses: actions/upload-artifact@v2
+          with:
+            name: Jar
+            path: |
+              build/libs
+  build-linux-x64:
+    needs: test
+    runs-on: ubuntu-latest
+    steeps:
       - name: Build On linux-x64
         env:
           CROSS: linux-x64
-        run: cross/setup_docker.sh
-
+        use: ./.github/actions/cross_build
+  build-android-arm64:
+    needs: test
+    runs-on: ubuntu-latest
+    steeps:
       - name: Build On android-arm64
         env:
           CROSS: android-arm64
-        run: cross/setup_docker.sh
-
+        use: ./.github/actions/cross_build
+  build-android-arm:
+    needs: test
+    runs-on: ubuntu-latest
+    steeps:
       - name: Build On android-arm
         env:
           CROSS: android-arm
-        run: cross/setup_docker.sh
-
+        use: ./.github/actions/cross_build
+  build-android-x86_64:
+    needs: test
+    runs-on: ubuntu-latest
+    steeps:
       - name: Build On android-x86_64
         env:
           CROSS: android-x86_64
-        run: cross/setup_docker.sh
+        use: ./.github/actions/cross_build
 
+  build-linux-arm64:
+    needs: test
+    runs-on: ubuntu-latest
+    steeps:
       - name: Build On linux-arm64
         env:
           CROSS: linux-arm64
-        run: cross/setup_docker.sh
-
-      - name: Build On windows-x86
+        use: ./.github/actions/cross_build
+  build-windows-shared-x86:
+    needs: test
+    runs-on: ubuntu-latest
+    steeps:
+      - name: Build On windows-shared-x86
         env:
           CROSS: windows-shared-x86
-        run: cross/setup_docker.sh
-
-      - name: Build On windows-x64
+        use: ./.github/actions/cross_build
+  build-windows-shared-x64:
+    needs: test
+    runs-on: ubuntu-latest
+    steeps:
+      - name: Build On windows-shared-x64
         env:
           CROSS: windows-shared-x64
-        run: cross/setup_docker.shJar
+        use: ./.github/actions/cross_build
 
-      - name: Archive NativeLib artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: NativeLib
-          path: |
-            native/cmake-build-debug/Release
-              
-      - name: Archive Jar artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: Jar
-          path: |
-              build/libs
