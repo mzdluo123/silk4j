@@ -2,6 +2,7 @@
 // Created by mzdlu on 2021-02-05.
 //
 
+#include <cstring>
 #include "JNILame.h"
 
 #define BUFFER_SIZE 8192
@@ -226,12 +227,12 @@ lame_global_flags *initialize(
 
 JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_initDecoder
         (JNIEnv *, jclass) {
-
+    hip = hip_decode_init();
 }
 
 JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_closeDecoder
         (JNIEnv *, jclass) {
-
+    hip_decode_exit(hip);
 }
 
 JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_decodeFile
@@ -245,22 +246,24 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_decodeFile
     output_file = fopen(target_path, "wb");
 
     unsigned char input[BUFFER_SIZE];
-//    short output[BUFFER_SIZE * 2];
-//    short output_r[BUFFER_SIZE * 2];
-    short *output_l = nullptr, *output_r = nullptr;
+    short output_l[BUFFER_SIZE *10];
+    short output_r[BUFFER_SIZE *10];
+    memset(output_l,0,BUFFER_SIZE*10);
+    memset(output_r,0,BUFFER_SIZE*10);
     int nb_read = 0;
     int nb_write = 0;
     int nb_total = 0;
 
 //	LOGD("Encoding started");
-    nb_read = fread(input_file, sizeof(char), BUFFER_SIZE, input_file);
+
+    nb_read = fread(input, 1, BUFFER_SIZE, input_file);
     while (nb_read) {
 //        nb_write = lame_encode_buffer(glf, input, input, nb_read, output,
 //                                      BUFFER_SIZE);
-//        nb_write = hip_decode(hip, input, nb_read, output_l, output_r);
+        nb_write = hip_decode(hip, input, nb_read, output_l, output_r);
         fwrite(output_l, nb_write, sizeof(short), output_file);
         nb_total += nb_write;
-        nb_read = fread(input_file, sizeof(char), BUFFER_SIZE, input_file);
+        nb_read = fread(input, 1, BUFFER_SIZE, input_file);
     }
 
 //	LOGD("Encoded %d bytes", nb_total);
