@@ -3,14 +3,24 @@ project(native)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(JAVA_AWT_LIBRARY NotNeeded)
-set(JAVA_JVM_LIBRARY NotNeeded)
-find_package(JNI REQUIRED)
 
 
-# 加入jni支持
-include_directories(${JAVA_INCLUDE_PATH})
-include_directories(${JAVA_INCLUDE_PATH2})
+IF (WIN32)
+   include_directories(jni_include/inc_win)
+ELSEIF (APPLE)
+    include_directories(jni_include/inc_mac)
+ELSEIF (UNIX)
+    include_directories(jni_include/inc_linux)
+ELSE()
+    set(JAVA_AWT_LIBRARY NotNeeded)
+    set(JAVA_JVM_LIBRARY NotNeeded)
+    find_package(JNI REQUIRED)
+
+    # 加入jni支持
+    include_directories(${JAVA_INCLUDE_PATH})
+    include_directories(${JAVA_INCLUDE_PATH2})
+ENDIF ()
+
 
 include_directories(../build/generated/sources/headers/java/main/)
 add_subdirectory(lame)
