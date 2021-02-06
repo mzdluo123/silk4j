@@ -209,7 +209,7 @@ jobs:
       - name: Add Permission
         run: chmod +x cross/setup_docker.sh &&  chmod +x cross/build.sh
       - name: Generate Headers
-        run: chmod +x gradlew && ./gradlew build
+        run: chmod +x gradlew && ./gradlew jar
       - name: Build
         run: |
           cd native
