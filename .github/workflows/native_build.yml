@@ -221,6 +221,6 @@ jobs:
       - name: Archive NativeLib artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: windows-shared-x64
+          name: windows-macos-x64
           path: |
             native/cmake-build-debug/Release
