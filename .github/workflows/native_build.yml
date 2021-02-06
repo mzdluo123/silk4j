@@ -19,66 +19,66 @@ jobs:
       - name: Run test
         run: chmod +x gradlew && ./gradlew test && ./gradlew jar
       - name: Archive Jar artifacts
-          uses: actions/upload-artifact@v2
-          with:
-            name: Jar
-            path: |
-              build/libs
+        uses: actions/upload-artifact@v2
+        with:
+          name: Jar
+          path: |
+            build/libs
   build-linux-x64:
     needs: test
     runs-on: ubuntu-latest
-    steeps:
+    steps:
       - name: Build On linux-x64
         env:
           CROSS: linux-x64
-        use: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build
   build-android-arm64:
     needs: test
     runs-on: ubuntu-latest
-    steeps:
+    steps:
       - name: Build On android-arm64
         env:
           CROSS: android-arm64
-        use: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build
   build-android-arm:
     needs: test
     runs-on: ubuntu-latest
-    steeps:
+    steps:
       - name: Build On android-arm
         env:
           CROSS: android-arm
-        use: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build
   build-android-x86_64:
     needs: test
     runs-on: ubuntu-latest
-    steeps:
+    steps:
       - name: Build On android-x86_64
         env:
           CROSS: android-x86_64
-        use: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build
 
   build-linux-arm64:
     needs: test
     runs-on: ubuntu-latest
-    steeps:
+    steps:
       - name: Build On linux-arm64
         env:
           CROSS: linux-arm64
-        use: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build
   build-windows-shared-x86:
     needs: test
     runs-on: ubuntu-latest
-    steeps:
+    steps:
       - name: Build On windows-shared-x86
         env:
           CROSS: windows-shared-x86
-        use: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build
   build-windows-shared-x64:
     needs: test
     runs-on: ubuntu-latest
-    steeps:
+    steps:
       - name: Build On windows-shared-x64
         env:
           CROSS: windows-shared-x64
-        use: ./.github/actions/cross_build
+        uses: ./.github/actions/cross_build
 
