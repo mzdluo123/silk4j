@@ -44,7 +44,7 @@ task compileCPP() {
     }
 
 }
-compileJava.finalizedBy(compileCPP)
+build.finalizedBy(compileCPP)
 
 test {
     useJUnitPlatform()
