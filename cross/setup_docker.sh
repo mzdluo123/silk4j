@@ -1,1 +1,1 @@
-docker run --rm -v $GITHUB_WORKSPACE:/workdir dockcross/$CROSS bash -c 'mkdir -p /usr/share/man/man1 && apt-get install -y default-jdk && export JAVA_HOME=/usr/lib/jvm/default-java && cd /workdir && /workdir/cross/build.sh'
+docker run --rm -v $GITHUB_WORKSPACE:/workdir -v $JAVA_HOME:/java_home dockcross/$CROSS bash -c 'export JAVA_HOME=/java_home && cd /workdir && /workdir/cross/build.sh'
