@@ -8,7 +8,7 @@ on:
     branches: [ master ]
 
 jobs:
-  setup:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,8 +20,8 @@ jobs:
         run: chmod +x gradlew && ./gradlew compileJava
       - name: Add permission
         run: chmod +x cross/build.sh && chmod +x cross/setup_docker.sh
-      - name: Build On linux-x64
-        run: cross/build.sh
+#      - name: Build On linux-x64
+#        run: cross/build.sh
       - name: Build On android-arm64
         env:
           CROSS: android-arm64
