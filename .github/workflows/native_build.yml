@@ -54,14 +54,18 @@ jobs:
       - name: Build On windows-x64
         env:
           CROSS: windows-shared-x64
-        run: cross/setup_docker.sh
+        run: cross/setup_docker.shJar
 
-      - name: Archive production artifacts
+      - name: Archive NativeLib artifacts
         uses: actions/upload-artifact@v2
         with:
-          - name: NativeLib
-            path: |
-              native/cmake-build-debug/Release
-          - name: Jar
-            path: |
+          name: NativeLib
+          path: |
+            native/cmake-build-debug/Release
+              
+      - name: Archive Jar artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Jar
+          path: |
               build/libs
