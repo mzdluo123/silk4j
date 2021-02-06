@@ -37,6 +37,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Build On linux-x64
         env:
           CROSS: linux-x64
@@ -45,6 +46,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Build On android-arm64
         env:
           CROSS: android-arm64
@@ -53,6 +55,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Build On android-arm
         env:
           CROSS: android-arm
@@ -61,6 +64,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Build On android-x86_64
         env:
           CROSS: android-x86_64
@@ -70,6 +74,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Build On linux-arm64
         env:
           CROSS: linux-arm64
@@ -78,6 +83,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Build On windows-shared-x86
         env:
           CROSS: windows-shared-x86
@@ -86,6 +92,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Build On windows-shared-x64
         env:
           CROSS: windows-shared-x64
