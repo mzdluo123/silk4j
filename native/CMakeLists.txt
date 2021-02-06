@@ -29,5 +29,11 @@ include_directories(src interface)
 
 add_library(silk SHARED ${SRC_DIR} bind/JNIEncoder.cpp bind/coder.h bind/coder.cpp)
 
+install(TARGETS silk lame
+        CONFIGURATIONS Debug
+        RUNTIME DESTINATION  ${CMAKE_CACHEFILE_DIR}/Debug)
+install(TARGETS silk lame
+        CONFIGURATIONS Release
+        RUNTIME DESTINATION ${CMAKE_CACHEFILE_DIR}/Release/build-${cross_triple})
 
 

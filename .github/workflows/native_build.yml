@@ -1,0 +1,29 @@
+
+name: Build Native
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Add permission
+        run: chmod +x cross/build.sh && chmod +x cross/setup_docker.sh
+      - name: Build On linux-x64
+        run: cross/build.sh
+      - name: Build On android-arm64
+        env:
+          CROSS: android-arm64
+        run: cross/setup_do
+
+      - name: Archive production artifacts
+          uses: actions/upload-artifact@v2
+          with:
+            name: native
+            path: |
+              native/cmake-build-debug/Release
