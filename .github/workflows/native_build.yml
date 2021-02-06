@@ -22,9 +22,9 @@ jobs:
         run: chmod +x cross/build.sh && chmod +x cross/setup_docker.sh
 
       - name: Build On linux-x64
-          env:
-            CROSS: linux-x64
-          run: cross/setup_docker.sh
+        env:
+          CROSS: linux-x64
+        run: cross/setup_docker.sh
 
       - name: Build On android-arm64
         env:
