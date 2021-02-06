@@ -28,8 +28,8 @@ jobs:
         run: cross/setup_do
 
       - name: Archive production artifacts
-          uses: actions/upload-artifact@v2
-          with:
-            name: native
-            path: |
-              native/cmake-build-debug/Release
+        uses: actions/upload-artifact@v2
+        with:
+          name: native
+          path: |
+            native/cmake-build-debug/Release
