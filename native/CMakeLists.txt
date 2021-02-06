@@ -11,7 +11,6 @@ find_package(JNI REQUIRED)
 # 加入jni支持
 include_directories(${JAVA_INCLUDE_PATH})
 include_directories(${JAVA_INCLUDE_PATH2})
-include_directories(${JAVA_AWT_INCLUDE_PATH})
 
 include_directories(../build/generated/sources/headers/java/main/)
 add_subdirectory(lame)
