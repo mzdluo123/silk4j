@@ -14,13 +14,20 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
+static def makeCmd() {
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        return "mingw32-make"
+    } else {
+        return "make"
+    }
+}
 
 task compileCPP() {
     doLast {
         mkdir("${projectDir}/native/cmake-build-debug")
         exec {
             workingDir "${projectDir}/native/cmake-build-debug"
-            commandLine "cmake", "-DCMAKE_BUILD_TYPE=Debug",  "${projectDir}/native"
+            commandLine "cmake", "-DCMAKE_BUILD_TYPE=Debug", "${projectDir}/native"
             standardOutput = System.out
         }
 
@@ -31,7 +38,7 @@ task compileCPP() {
         }
         exec {
             workingDir "${projectDir}/native/cmake-build-debug"
-            commandLine "make"
+            commandLine makeCmd(), "-j8"
             standardOutput = System.out
         }
     }
