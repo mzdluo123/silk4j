@@ -42,6 +42,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Add Permission
+        run: chmod +x cross/setup_docker.sh &&  cross/build.sh
       - name: Generate Headers
         run: chmod +x gradlew && ./gradlew compileJava
       - name: Build
@@ -63,6 +65,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Add Permission
+        run: chmod +x cross/setup_docker.sh &&  cross/build.sh
       - name: Generate Headers
         run: chmod +x gradlew && ./gradlew compileJava
       - name: Build
@@ -85,6 +89,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Add Permission
+        run: chmod +x cross/setup_docker.sh &&  cross/build.sh
       - name: Generate Headers
         run: chmod +x gradlew && ./gradlew compileJava
       - name: Build
@@ -106,6 +112,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Add Permission
+        run: chmod +x cross/setup_docker.sh &&  cross/build.sh
       - name: Generate Headers
         run: chmod +x gradlew && ./gradlew compileJava
       - name: Build
@@ -128,6 +136,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Add Permission
+        run: chmod +x cross/setup_docker.sh &&  cross/build.sh
       - name: Generate Headers
         run: chmod +x gradlew && ./gradlew compileJava
       - name: Build
@@ -149,6 +159,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Add Permission
+        run: chmod +x cross/setup_docker.sh &&  cross/build.sh
       - name: Generate Headers
         run: chmod +x gradlew && ./gradlew compileJava
       - name: Build
@@ -170,6 +182,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Add Permission
+        run: chmod +x cross/setup_docker.sh &&  cross/build.sh
       - name: Generate Headers
         run: chmod +x gradlew && ./gradlew compileJava
       - name: Build
