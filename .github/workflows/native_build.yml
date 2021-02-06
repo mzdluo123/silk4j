@@ -38,63 +38,148 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build On linux-x64
+      - name: Set up JDK 11
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+      - name: Generate Headers
+        run: chmod +x gradlew && ./gradlew compileJava
+      - name: Build
         env:
           CROSS: linux-x64
-        uses: ./.github/cross_build
+        run: cross/setup_docker.sh
+      - name: Archive NativeLib artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-x64
+          path: |
+            native/cmake-build-debug/Release
   build-android-arm64:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build On android-arm64
+      - name: Set up JDK 11
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+      - name: Generate Headers
+        run: chmod +x gradlew && ./gradlew compileJava
+      - name: Build
         env:
           CROSS: android-arm64
-        uses: ./.github/cross_build
+        run: cross/setup_docker.sh
+      - name: Archive NativeLib artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-arm64
+          path: |
+            native/cmake-build-debug/Release
+
   build-android-arm:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build On android-arm
+      - name: Set up JDK 11
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+      - name: Generate Headers
+        run: chmod +x gradlew && ./gradlew compileJava
+      - name: Build
         env:
           CROSS: android-arm
-        uses: ./.github/cross_build
+        run: cross/setup_docker.sh
+      - name: Archive NativeLib artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-arm
+          path: |
+            native/cmake-build-debug/Release
   build-android-x86_64:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build On android-x86_64
+      - name: Set up JDK 11
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+      - name: Generate Headers
+        run: chmod +x gradlew && ./gradlew compileJava
+      - name: Build
         env:
           CROSS: android-x86_64
-        uses: ./.github/cross_build
+        run: cross/setup_docker.sh
+      - name: Archive NativeLib artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-x86_64
+          path: |
+            native/cmake-build-debug/Release
 
   build-linux-arm64:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build On linux-arm64
+      - name: Set up JDK 11
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+      - name: Generate Headers
+        run: chmod +x gradlew && ./gradlew compileJava
+      - name: Build
         env:
           CROSS: linux-arm64
-        uses: ./.github/cross_build
+        run: cross/setup_docker.sh
+      - name: Archive NativeLib artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-arm64
+          path: |
+            native/cmake-build-debug/Release
   build-windows-shared-x86:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build On windows-shared-x86
+      - name: Set up JDK 11
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+      - name: Generate Headers
+        run: chmod +x gradlew && ./gradlew compileJava
+      - name: Build
         env:
           CROSS: windows-shared-x86
-        uses: ./.github/cross_build
+        run: cross/setup_docker.sh
+      - name: Archive NativeLib artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-shared-x86
+          path: |
+            native/cmake-build-debug/Release
   build-windows-shared-x64:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build On windows-shared-x64
+      - name: Set up JDK 11
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+      - name: Generate Headers
+        run: chmod +x gradlew && ./gradlew compileJava
+      - name: Build
         env:
           CROSS: windows-shared-x64
-        uses: ./.github/cross_build
+        run: cross/setup_docker.sh
+      - name: Archive NativeLib artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-shared-x64
+          path: |
+            native/cmake-build-debug/Release
 
