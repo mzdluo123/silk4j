@@ -44,7 +44,6 @@ task compileCPP() {
     }
 
 }
-build.finalizedBy(compileCPP)
 
 test {
     useJUnitPlatform()

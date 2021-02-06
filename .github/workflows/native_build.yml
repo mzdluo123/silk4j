@@ -16,8 +16,17 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Compile Java
+        run: chmod +x gradlew && ./gradlew jar
+      - name: Compile Native
+        run: |
+          cd native
+          mkdir cmake-build-debug
+          cd cmake-build-debug
+          cmake ..
+          make -j8
       - name: Run test
-        run: chmod +x gradlew && ./gradlew test && ./gradlew jar
+        run: ./gradlew test
       - name: Archive Jar artifacts
         uses: actions/upload-artifact@v2
         with:
