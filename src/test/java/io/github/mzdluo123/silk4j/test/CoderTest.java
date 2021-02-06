@@ -37,7 +37,7 @@ public class CoderTest {
 
     @Test
     public void testEncode() {
-        SilkCoder.encode("out.pcm", "silk.amr");
+        SilkCoder.encode("src/test/resources/out.pcm", "silk.amr");
         File outFile = new File("silk.amr");
         assertTrue(outFile.exists());
         outFile.delete();
@@ -46,14 +46,14 @@ public class CoderTest {
 
     @Test
     public void testEncodeMp3() throws IOException {
-        LameCoder.encode("out.pcm", "silk.mp3");
+        LameCoder.encode("src/test/resources/out.pcm", "silk.mp3");
         File outFile = new File("silk.mp3");
         assertTrue(outFile.exists());
 
     }
     @Test
     public void testDecodeMp3() throws IOException {
-        LameCoder.decode("silk.mp3", "decode.pcm");
+        LameCoder.decode("src/test/resources/out.pcm/silk.mp3", "decode.pcm");
         File outFile = new File("decode.pcm");
         assertTrue(outFile.exists());
     }

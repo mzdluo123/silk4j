@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_initialize(
         jstring id3tagTitle, jstring id3tagArtist, jstring id3tagAlbum,
         jstring id3tagYear, jstring id3tagComment) {
 
-    glf = initialize(env,  isDecode,inSamplerate, outChannel, outSamplerate, outBitrate, scaleInput, mode,
+    glf = initialize(env,inSamplerate, outChannel, outSamplerate, outBitrate, scaleInput, mode,
                      vbrMode,
                      quality, vbrQuality, abrMeanBitrate, lowpassFreq, highpassFreq, id3tagTitle,
                      id3tagArtist, id3tagAlbum,
@@ -112,7 +112,6 @@ lame_global_flags *initializeDefault(JNIEnv *env) {
 
 lame_global_flags *initialize(
         JNIEnv *env,
-        jboolean is_decode,
         jint inSamplerate, jint outChannel,
         jint outSamplerate, jint outBitrate, jfloat scaleInput, jint mode, jint vbrMode,
         jint quality, jint vbrQuality, jint abrMeanBitrate, jint lowpassFreq, jint highpassFreq,
@@ -130,7 +129,6 @@ lame_global_flags *initialize(
     lame_set_VBR_mean_bitrate_kbps(glf, abrMeanBitrate);
     lame_set_lowpassfreq(glf, lowpassFreq);
     lame_set_highpassfreq(glf, highpassFreq);
-    lame_set_decode_only(glf, is_decode);
 
     switch (mode) {
         case 0:
