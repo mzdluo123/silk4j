@@ -59,6 +59,8 @@ char   *strchr(), *strrchr();
 #include "lame_global_flags.h"
 #include "util.h"
 #include "bitstream.h"
+#include <string.h>
+#include <stdlib.h>
 
 
 static const char *const genre_names[] = {

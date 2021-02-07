@@ -34,6 +34,8 @@
 #include "VbrTag.h"
 #include "lame_global_flags.h"
 #include "tables.h"
+#include <stdlib.h>
+#include <string.h>
 
 #ifdef __sun__
 /* woraround for SunOS 4.x, it has SEEK_* defined here */
