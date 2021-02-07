@@ -216,7 +216,7 @@ jobs:
           mkdir cmake-build-debug
           cd cmake-build-debug
           rm -rf CMakeCache.txt
-          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CACHEFILE_DIR=. -Dcross_triple=macos-x64 ..
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CACHEFILE_DIR=$PWD -Dcross_triple=macos-x64 ..
           make install -j8
       - name: Archive NativeLib artifacts
         uses: actions/upload-artifact@v2
