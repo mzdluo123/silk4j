@@ -35,7 +35,9 @@ AUX_SOURCE_DIRECTORY(bind SRC_DIR)
 
 include_directories(src interface)
 
-SET(ANDROID_STL c++_shared)
+set(CMAKE_ANDROID_ARM_MODE ON)
+set(CMAKE_ANDROID_ARM_NEON ON)
+set(CMAKE_ANDROID_STL_TYPE c++_shared )
 
 add_library(silk SHARED ${SRC_DIR} bind/JNIEncoder.cpp bind/coder.h bind/coder.cpp)
 
