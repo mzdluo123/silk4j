@@ -35,6 +35,7 @@ AUX_SOURCE_DIRECTORY(bind SRC_DIR)
 
 include_directories(src interface)
 
+SET(ANDROID_STL c++_shared)
 
 add_library(silk SHARED ${SRC_DIR} bind/JNIEncoder.cpp bind/coder.h bind/coder.cpp)
 
