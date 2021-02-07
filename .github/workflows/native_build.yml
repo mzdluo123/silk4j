@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: 11
       - name: Compile Java
-        run: chmod +x gradlew && ./gradlew build
+        run: chmod +x gradlew && ./gradlew jar
       - name: Compile Native
         run: |
           cd native
@@ -233,6 +233,7 @@ jobs:
       - build-linux-arm64
       - build-windows-shared-x64
       - build-windows-shared-x86
+      - build-macos-latest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
