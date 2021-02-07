@@ -28,7 +28,7 @@ public class SilkCoder {
         encode(source,
                 dest, true,
                 24000,
-                0,
+                24000,
                 (20 * 24000) / 1000,
                 0,
                 0,

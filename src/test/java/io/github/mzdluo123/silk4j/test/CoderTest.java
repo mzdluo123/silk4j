@@ -40,7 +40,6 @@ public class CoderTest {
         SilkCoder.encode("src/test/resources/out.pcm", "silk.amr");
         File outFile = new File("silk.amr");
         assertTrue(outFile.exists());
-        outFile.delete();
 
     }
 

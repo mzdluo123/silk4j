@@ -44,10 +44,10 @@ public class LameCoder {
     public static void encode(String source, String dest) throws IOException {
 
         LameCoder coder = new LameBuilder()
-                .setInSampleRate(16000)
+                .setInSampleRate(24000)
                 .setOutChannels(1)
                 .setOutBitrate(48)
-                .setOutSampleRate(16000)
+                .setOutSampleRate(24000)
                 .setQuality(8)
                 .build();
         encodeFile(source, dest);
