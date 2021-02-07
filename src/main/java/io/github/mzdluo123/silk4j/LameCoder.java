@@ -16,7 +16,7 @@ public class LameCoder {
 
 
     private void initialize(LameBuilder builder) {
-        initialize( builder.inSampleRate, builder.outChannel, builder.outSampleRate,
+        initialize(builder.inSampleRate, builder.outChannel, builder.outSampleRate,
                 builder.outBitrate, builder.scaleInput, getIntForMode(builder.mode), getIntForVbrMode(builder.vbrMode), builder.quality, builder.vbrQuality, builder.abrMeanBitrate,
                 builder.lowpassFreq, builder.highpassFreq, builder.id3tagTitle, builder.id3tagArtist,
                 builder.id3tagAlbum, builder.id3tagYear, builder.id3tagComment);
@@ -53,15 +53,17 @@ public class LameCoder {
         encodeFile(source, dest);
         coder.close();
     }
+
     public static void decode(String source, String dest) throws IOException {
 
-      initDecoder();
-      decodeFile(source,dest);
-      closeDecoder();
+        initDecoder();
+        decodeFile(source, dest);
+        closeDecoder();
     }
+
     private static native void initializeDefault();
 
-    private static native void initialize( int inSamplerate, int outChannel,
+    private static native void initialize(int inSamplerate, int outChannel,
                                           int outSamplerate, int outBitrate, float scaleInput, int mode, int vbrMode,
                                           int quality, int vbrQuality, int abrMeanBitrate, int lowpassFreq, int highpassFreq, String id3tagTitle,
                                           String id3tagArtist, String id3tagAlbum, String id3tagYear,

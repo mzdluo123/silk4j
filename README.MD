@@ -1,0 +1,5 @@
+# Silk4j
+
+silkv3编码器的Java接口，为mirai相关生态提供语音编解码方案
+
+请到action页面下载最新的jar和对应本地链接库开始使用
