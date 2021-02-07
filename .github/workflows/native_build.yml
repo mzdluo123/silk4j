@@ -80,7 +80,7 @@ jobs:
           path: |
             native/cmake-build-debug/Release
 
-  build-android-arm:
+  build-linux-arm:
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -95,12 +95,12 @@ jobs:
         run: chmod +x gradlew && ./gradlew compileJava
       - name: Build
         env:
-          CROSS: android-arm
+          CROSS: linux-arm64
         run: cross/setup_docker.sh
       - name: Archive NativeLib artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: android-arm
+          name: linux-arm
           path: |
             native/cmake-build-debug/Release
   build-android-x86_64:
