@@ -245,7 +245,7 @@ jobs:
         with:
           path: artifacts
       - name: copy Native Lib
-        run: cp -r artifacts/* src/main/resources
+        run: mkdir src/main/resources/ && cp -r artifacts/* src/main/resources/
       - name: packJar
         run: chmod +x gradlew && ./gradlew jar
       - name: Upload AllInOneJar
