@@ -47,9 +47,8 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_encode
     SKP_SILK_SDK_EncControlStruct encControl; // Struct for input to encoder
     SKP_SILK_SDK_EncControlStruct encStatus;  // Struct for status of encoder
 
-    bool copy = 0;
-    speechInFileName = (char *) env->GetStringUTFChars(source, reinterpret_cast<jboolean *>(&copy));
-    bitOutFileName = (char *) env->GetStringUTFChars(dest, reinterpret_cast<jboolean *>(&copy));
+    speechInFileName = (char *) (*env)->GetStringUTFChars(env, source, NULL);
+    bitOutFileName = (char *) (*env)->GetStringUTFChars(env, dest, NULL);
 
 
     /* Open files */
@@ -57,8 +56,8 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_encode
     if (speechInFile == NULL) {
 //        printf("Error: could not open input file %s\n", speechInFileName);
 //        exit(0);
-        env->ReleaseStringUTFChars(source, speechInFileName);
-        env->ReleaseStringUTFChars(dest, bitOutFileName);
+        (*env)->ReleaseStringUTFChars(env, source, speechInFileName);
+        (*env)->ReleaseStringUTFChars(env, dest, bitOutFileName);
         return;
     }
 
@@ -66,8 +65,8 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_encode
     if (bitOutFile == NULL) {
 //        printf("Error: could not open output file %s\n", bitOutFileName);
 //        exit(0);
-        env->ReleaseStringUTFChars(source, speechInFileName);
-        env->ReleaseStringUTFChars(dest, bitOutFileName);
+        (*env)->ReleaseStringUTFChars(env, source, speechInFileName);
+        (*env)->ReleaseStringUTFChars(env, dest, bitOutFileName);
         return;
     }
 
@@ -103,7 +102,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_encode
     /* Set Encoder parameters */
     encControl.API_sampleRate = fs_Hz;
     encControl.maxInternalSampleRate = maxInternalSampleRate;
-    encControl.packetSize =packetSize;
+    encControl.packetSize = packetSize;
     encControl.packetLossPercentage = packetLossPercentage;
     encControl.useInBandFEC = useInBandFEC;
     encControl.useDTX = useDTX;
@@ -218,7 +217,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_encode
 //        printf("%.3f %.3f \n", avg_rate, act_rate);
 //    }
 
-    env->ReleaseStringUTFChars(source, speechInFileName);
-    env->ReleaseStringUTFChars(dest, bitOutFileName);
+    (*env)->ReleaseStringUTFChars(env, source, speechInFileName);
+    (*env)->ReleaseStringUTFChars(env, dest, bitOutFileName);
 
 }

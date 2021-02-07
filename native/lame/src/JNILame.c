@@ -2,7 +2,7 @@
 // Created by mzdlu on 2021-02-05.
 //
 
-#include <cstring>
+#include <string.h>
 #include "JNILame.h"
 
 #define BUFFER_SIZE 8192
@@ -73,8 +73,8 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_encodeFile
          jclass cls, jstring in_source_path, jstring in_target_path) {
 
     const char *source_path, *target_path;
-    source_path = env->GetStringUTFChars(in_source_path, NULL);
-    target_path = env->GetStringUTFChars(in_target_path, NULL);
+    source_path = (*env)->GetStringUTFChars(env, in_source_path, NULL);
+    target_path = (*env)->GetStringUTFChars(env, in_target_path, NULL);
 
     FILE *input_file, *output_file;
     input_file = fopen(source_path, "rb");
@@ -179,19 +179,19 @@ lame_global_flags *initialize(
     const jchar *year = NULL;
     const jchar *comment = NULL;
     if (id3tagTitle) {
-        title = env->GetStringChars(id3tagTitle, NULL);
+        title = (*env)->GetStringChars(env,id3tagTitle, NULL);
     }
     if (id3tagArtist) {
-        artist = env->GetStringChars(id3tagArtist, NULL);
+        artist = (*env)->GetStringChars(env,id3tagArtist, NULL);
     }
     if (id3tagAlbum) {
-        album = env->GetStringChars(id3tagAlbum, NULL);
+        album = (*env)->GetStringChars(env,id3tagAlbum, NULL);
     }
     if (id3tagYear) {
-        year = env->GetStringChars(id3tagYear, NULL);
+        year = (*env)->GetStringChars(env,id3tagYear, NULL);
     }
     if (id3tagComment) {
-        comment = env->GetStringChars(id3tagComment, NULL);
+        comment = (*env)->GetStringChars(env,id3tagComment, NULL);
     }
 
     if (title || artist || album || year || comment) {
@@ -199,23 +199,23 @@ lame_global_flags *initialize(
 
         if (title) {
             id3tag_set_title(glf, (const char *) title);
-            env->ReleaseStringChars(id3tagTitle, title);
+            (*env)->ReleaseStringChars(env,id3tagTitle, title);
         }
         if (artist) {
             id3tag_set_artist(glf, (const char *) artist);
-            env->ReleaseStringChars(id3tagArtist, artist);
+            (*env)->ReleaseStringChars(env,id3tagArtist, artist);
         }
         if (album) {
             id3tag_set_album(glf, (const char *) album);
-            env->ReleaseStringChars(id3tagAlbum, album);
+            (*env)->ReleaseStringChars(env,id3tagAlbum, album);
         }
         if (year) {
             id3tag_set_year(glf, (const char *) year);
-            env->ReleaseStringChars(id3tagYear, year);
+            (*env)->ReleaseStringChars(env,id3tagYear, year);
         }
         if (comment) {
             id3tag_set_comment(glf, (const char *) comment);
-            env->ReleaseStringChars(id3tagComment, comment);
+            (*env)->ReleaseStringChars(env,id3tagComment, comment);
         }
     }
 
@@ -226,30 +226,30 @@ lame_global_flags *initialize(
 }
 
 JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_initDecoder
-        (JNIEnv *, jclass) {
+        (JNIEnv *env, jclass cls) {
     hip = hip_decode_init();
 }
 
 JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_closeDecoder
-        (JNIEnv *, jclass) {
+        (JNIEnv *env, jclass cls) {
     hip_decode_exit(hip);
 }
 
 JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_decodeFile
         (JNIEnv *env, jclass cls, jstring source, jstring dest) {
     const char *source_path, *target_path;
-    source_path = env->GetStringUTFChars(source, NULL);
-    target_path = env->GetStringUTFChars(dest, NULL);
+    source_path = (*env)->GetStringUTFChars(env, source, NULL);
+    target_path = (*env)->GetStringUTFChars(env, dest, NULL);
 
     FILE *input_file, *output_file;
     input_file = fopen(source_path, "rb");
     output_file = fopen(target_path, "wb");
 
     unsigned char input[BUFFER_SIZE];
-    short output_l[BUFFER_SIZE *10];
-    short output_r[BUFFER_SIZE *10];
-    memset(output_l,0,BUFFER_SIZE*10);
-    memset(output_r,0,BUFFER_SIZE*10);
+    short output_l[BUFFER_SIZE * 10];
+    short output_r[BUFFER_SIZE * 10];
+    memset(output_l, 0, BUFFER_SIZE * 10);
+    memset(output_r, 0, BUFFER_SIZE * 10);
     int nb_read = 0;
     int nb_write = 0;
     int nb_total = 0;

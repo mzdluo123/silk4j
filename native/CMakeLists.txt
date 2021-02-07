@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 project(native)
 
-set(CMAKE_CXX_STANDARD 14)
-
-
 
 IF (WIN32)
    include_directories(jni_include/inc_win)
@@ -37,9 +34,9 @@ include_directories(src interface)
 
 set(CMAKE_ANDROID_ARM_MODE ON)
 set(CMAKE_ANDROID_ARM_NEON ON)
-set(CMAKE_ANDROID_STL_TYPE c++_shared )
+set(CMAKE_ANDROID_STL_TYPE system )
 
-add_library(silk SHARED ${SRC_DIR} bind/JNIEncoder.cpp bind/coder.h bind/coder.cpp)
+add_library(silk SHARED ${SRC_DIR} bind/JNIEncoder.c bind/coder.h bind/coder.c)
 
 install(TARGETS silk lame
         CONFIGURATIONS Debug
