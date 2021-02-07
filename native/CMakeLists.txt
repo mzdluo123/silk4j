@@ -45,8 +45,8 @@ install(TARGETS silk lame
         )
 install(TARGETS silk lame
         CONFIGURATIONS Release
-        LIBRARY DESTINATION ${CMAKE_CACHEFILE_DIR}/Release/build-${cross_triple}
-        RUNTIME DESTINATION ${CMAKE_CACHEFILE_DIR}/Release/build-${cross_triple}
+        LIBRARY DESTINATION ${CMAKE_CACHEFILE_DIR}/Release/
+        RUNTIME DESTINATION ${CMAKE_CACHEFILE_DIR}/Release/
         )
 
 
