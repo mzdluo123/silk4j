@@ -31,6 +31,9 @@
 /* for FILE typedef, TODO: remove when removing lame_mp3_tags_fid */
 #include <stdio.h>
 
+#include <stdlib.h>
+#include <string.h>
+
 #if defined(__cplusplus)
 extern "C" {
 #endif
