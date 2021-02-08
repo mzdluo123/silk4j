@@ -17,6 +17,7 @@ public class AudioUtils {
         if (!tempDir.canWrite()) {
             throw new IOException("缓存目录无写入权限，请重试");
         }
+        NativeLibLoader.load();
     }
 
     public static File mp3ToSilk(File mp3File) throws IOException {
@@ -34,10 +35,7 @@ public class AudioUtils {
     public static File mp3ToSilk(InputStream mp3FileStream) throws IOException {
 
         File mp3File = getTempFile("mp3");
-        FileOutputStream fileOutputStream = new FileOutputStream(mp3File);
-        byte data[] = mp3FileStream.readAllBytes();
-        fileOutputStream.write(data);
-        fileOutputStream.close();
+        streamToTempFile(mp3FileStream,mp3File);
         return mp3ToSilk(mp3File);
     }
 
@@ -55,15 +53,24 @@ public class AudioUtils {
 
     public static File silkToMp3(InputStream silkFileStream) throws IOException {
         File mp3File = getTempFile("silk");
-        FileOutputStream fileOutputStream = new FileOutputStream(mp3File);
-        byte data[] = silkFileStream.readAllBytes();
-        fileOutputStream.write(data);
-        fileOutputStream.close();
+        streamToTempFile(silkFileStream, mp3File);
         return silkToMp3(mp3File);
     }
 
 
-      static File getTempFile(String type) {
+    static void streamToTempFile(InputStream inputStream, File tmpFile) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(tmpFile);
+        byte[] buf = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buf)) > 0) {
+            fileOutputStream.write(buf, 0, bytesRead);
+        }
+        inputStream.close();
+        fileOutputStream.close();
+    }
+
+
+    static File getTempFile(String type) {
         String fileName = "mirai_audio_" +
                 type +
                 "_" +
