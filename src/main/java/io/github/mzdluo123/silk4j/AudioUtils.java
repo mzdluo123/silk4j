@@ -63,7 +63,7 @@ public class AudioUtils {
     }
 
 
-    private static File getTempFile(String type) {
+      static File getTempFile(String type) {
         String fileName = "mirai_audio_" +
                 type +
                 "_" +

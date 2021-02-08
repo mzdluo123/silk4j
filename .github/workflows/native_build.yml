@@ -269,6 +269,13 @@ jobs:
           path: artifacts
       - name: copy Native Lib
         run: mkdir src/main/resources/ && mkdir src/main/resources/silk4j_libs && cp -r artifacts/* src/main/resources/silk4j_libs
+      - name: Generate file list
+        run: |
+          cd src/main/resources
+          find . -name *.dll > filelist.txt
+          find . -name *.so >> filelist.txt
+          find . -name *.dylib >> filelist.txt
+          mv filelist.txt silk4j_libs
       - name: packJar
         run: chmod +x gradlew && ./gradlew jar
       - name: Upload AllInOneJar
