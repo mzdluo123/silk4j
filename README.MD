@@ -2,13 +2,14 @@
 
 silkv3编码器的Java接口，为mirai相关生态提供语音编解码方案
 
-请到action页面下载最新的jar和对应本地链接库开始使用
+请到action页面下载AllInOne中的jar并导入你的项目即可开始使用
 
 # 使用方式
 
 ```java
 
 // 请使用这个类完成编码
+// 所有的编码默认都只使用左声道
 public class AudioUtils {
     //使用之前需要初始化
     public static void init() throws IOException {
@@ -22,7 +23,6 @@ public class AudioUtils {
     public static File mp3ToSilk(File mp3File) throws IOException {
        
     }
-
     public static File mp3ToSilk(InputStream mp3FileStream) throws IOException {
         
     }
