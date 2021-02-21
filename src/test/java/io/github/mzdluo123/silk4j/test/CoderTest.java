@@ -59,9 +59,9 @@ public class CoderTest {
         assertTrue(outFile.exists());
     }
 
-    @Test
-    public void testMp3ToSilk() throws IOException {
-        File outFile = AudioUtils.mp3ToSilk(new File("src/test/resources/tts.mp3"));
-        assertTrue(outFile.exists());
-    }
+//    @Test
+//    public void testMp3ToSilk() throws IOException {
+//        File outFile = AudioUtils.mp3ToSilk(new File("src/test/resources/tts.mp3"));
+//        assertTrue(outFile.exists());
+//    }
 }
