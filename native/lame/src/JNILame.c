@@ -179,19 +179,19 @@ lame_global_flags *initialize(
     const jchar *year = NULL;
     const jchar *comment = NULL;
     if (id3tagTitle) {
-        title = (*env)->GetStringChars(env,id3tagTitle, NULL);
+        title = (*env)->GetStringChars(env, id3tagTitle, NULL);
     }
     if (id3tagArtist) {
-        artist = (*env)->GetStringChars(env,id3tagArtist, NULL);
+        artist = (*env)->GetStringChars(env, id3tagArtist, NULL);
     }
     if (id3tagAlbum) {
-        album = (*env)->GetStringChars(env,id3tagAlbum, NULL);
+        album = (*env)->GetStringChars(env, id3tagAlbum, NULL);
     }
     if (id3tagYear) {
-        year = (*env)->GetStringChars(env,id3tagYear, NULL);
+        year = (*env)->GetStringChars(env, id3tagYear, NULL);
     }
     if (id3tagComment) {
-        comment = (*env)->GetStringChars(env,id3tagComment, NULL);
+        comment = (*env)->GetStringChars(env, id3tagComment, NULL);
     }
 
     if (title || artist || album || year || comment) {
@@ -199,23 +199,23 @@ lame_global_flags *initialize(
 
         if (title) {
             id3tag_set_title(glf, (const char *) title);
-            (*env)->ReleaseStringChars(env,id3tagTitle, title);
+            (*env)->ReleaseStringChars(env, id3tagTitle, title);
         }
         if (artist) {
             id3tag_set_artist(glf, (const char *) artist);
-            (*env)->ReleaseStringChars(env,id3tagArtist, artist);
+            (*env)->ReleaseStringChars(env, id3tagArtist, artist);
         }
         if (album) {
             id3tag_set_album(glf, (const char *) album);
-            (*env)->ReleaseStringChars(env,id3tagAlbum, album);
+            (*env)->ReleaseStringChars(env, id3tagAlbum, album);
         }
         if (year) {
             id3tag_set_year(glf, (const char *) year);
-            (*env)->ReleaseStringChars(env,id3tagYear, year);
+            (*env)->ReleaseStringChars(env, id3tagYear, year);
         }
         if (comment) {
             id3tag_set_comment(glf, (const char *) comment);
-            (*env)->ReleaseStringChars(env,id3tagComment, comment);
+            (*env)->ReleaseStringChars(env, id3tagComment, comment);
         }
     }
 
@@ -235,9 +235,10 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_closeDecoder
     hip_decode_exit(hip);
 }
 
-JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_decodeFile
+JNIEXPORT jint JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_decodeFile
         (JNIEnv *env, jclass cls, jstring source, jstring dest) {
     const char *source_path, *target_path;
+    mp3data_struct mp3data;
     source_path = (*env)->GetStringUTFChars(env, source, NULL);
     target_path = (*env)->GetStringUTFChars(env, dest, NULL);
 
@@ -261,16 +262,16 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_decodeFile
     while (nb_read) {
 //        nb_write = lame_encode_buffer(glf, input, input, nb_read, output,
 //                                      BUFFER_SIZE);
-        nb_write = hip_decode(hip, input, nb_read, output_l, output_r);
+        nb_write = hip_decode_headers(hip, input, nb_read, output_l, output_r, &mp3data);
         total_size += nb_write;
         fwrite(output_l, nb_write, sizeof(short), output_file);
         nb_read = fread(input, 1, BUFFER_SIZE, input_file);
     }
 
-    if (total_size == 0){
-        memset(input,0,BUFFER_SIZE);
+    if (total_size == 0) {
+        memset(input, 0, BUFFER_SIZE);
         nb_read = 10;
-        nb_write = hip_decode(hip, input, nb_read, output_l, output_r);
+        nb_write = hip_decode_headers(hip, input, nb_read, output_l, output_r, &mp3data);
         fwrite(output_l, nb_write, sizeof(short), output_file);
     }
 
@@ -282,6 +283,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_decodeFile
 
     fclose(input_file);
     fclose(output_file);
+    return mp3data.bitrate;
 }
 
 

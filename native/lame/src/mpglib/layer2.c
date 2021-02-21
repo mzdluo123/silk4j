@@ -35,7 +35,7 @@
 #include <dmalloc.h>
 #endif
 #include <assert.h>
-#include <unistd.h>
+
 
 static int gd_are_hip_tables_layer2_initialized = 0;
 

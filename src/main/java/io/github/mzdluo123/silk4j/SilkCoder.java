@@ -23,7 +23,7 @@ public class SilkCoder {
                               int bitRate);
 
     public static void encode(String source,
-                       String dest
+                       String dest,int bitrate
     ) {
         encode(source,
                 dest, true,
@@ -34,7 +34,7 @@ public class SilkCoder {
                 0,
                 0,
                 2,
-                25000);
+                bitrate);
     }
 
 }

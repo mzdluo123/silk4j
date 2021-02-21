@@ -21,13 +21,13 @@ public class AudioUtils {
     }
 
     public static File mp3ToSilk(File mp3File) throws IOException {
-        if (!mp3File.exists()){
+        if (!mp3File.exists()) {
             throw new FileNotFoundException();
         }
         File pcmFile = getTempFile("pcm");
         File silkFile = getTempFile("silk");
-        LameCoder.decode(mp3File.getAbsolutePath(), pcmFile.getAbsolutePath());
-        SilkCoder.encode(pcmFile.getAbsolutePath(), silkFile.getAbsolutePath());
+        int bitrate = LameCoder.decode(mp3File.getAbsolutePath(), pcmFile.getAbsolutePath());
+        SilkCoder.encode(pcmFile.getAbsolutePath(), silkFile.getAbsolutePath(), bitrate*1000);
         pcmFile.delete();
         return silkFile;
     }
@@ -35,18 +35,18 @@ public class AudioUtils {
     public static File mp3ToSilk(InputStream mp3FileStream) throws IOException {
 
         File mp3File = getTempFile("mp3");
-        streamToTempFile(mp3FileStream,mp3File);
+        streamToTempFile(mp3FileStream, mp3File);
         return mp3ToSilk(mp3File);
     }
 
     public static File silkToMp3(File silkFile) throws IOException {
-        if (!silkFile.exists()){
+        if (!silkFile.exists()) {
             throw new FileNotFoundException();
         }
         File pcmFile = getTempFile("pcm");
         File mp3File = getTempFile("mp3");
         SilkCoder.decode(silkFile.getAbsolutePath(), pcmFile.getAbsolutePath());
-        LameCoder.encode(pcmFile.getAbsolutePath(), mp3File.getAbsolutePath());
+        LameCoder.encode(pcmFile.getAbsolutePath(), mp3File.getAbsolutePath(), 24000);
         pcmFile.delete();
         return mp3File;
     }

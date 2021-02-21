@@ -91,7 +91,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_decode
                 /* Non-equal strings */
 //                printf("Error: Wrong Header %s\n", header_buf);
 //                exit(0);
-                return;
+                return ;
             }
         } else {
             counter = fread(header_buf, sizeof(char), strlen("#!SILK_V3"), bitInFile);
@@ -100,7 +100,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_decode
                 /* Non-equal strings */
 //                printf("Error: Wrong Header %s\n", header_buf);
 //
-                return;
+                return ;
             }
         }
     }
@@ -109,7 +109,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_decode
     if (speechOutFile == NULL) {
 //        printf("Error: could not open output file %s\n", speechOutFileName);
 //        exit(0);
-        return;
+        return ;
     }
 
     /* Set the samplingrate that is requested for the output */
@@ -266,7 +266,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_decode
         if (totBytes < 0 || totBytes > sizeof(payload)) {
 //            fprintf(stderr, "\rPackets decoded:             %d", totPackets);
 //            return -1;
-            return;
+            return ;
         }
         SKP_memmove(payload, &payload[nBytesPerPacket[0]], totBytes * sizeof(SKP_uint8));
         payloadEnd -= nBytesPerPacket[0];
@@ -365,7 +365,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_decode
         if (totBytes < 0 || totBytes > sizeof(payload)) {
 
 //            fprintf(stderr, "\rPackets decoded:              %d", totPackets);
-            return;
+            return ;
         }
 
         SKP_memmove(payload, &payload[nBytesPerPacket[0]], totBytes * sizeof(SKP_uint8));
