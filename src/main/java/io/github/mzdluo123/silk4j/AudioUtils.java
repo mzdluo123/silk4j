@@ -21,8 +21,8 @@ public class AudioUtils {
     }
 
     public static File mp3ToSilk(File mp3File) throws IOException {
-        if (!mp3File.exists()) {
-            throw new FileNotFoundException();
+        if (!mp3File.exists() || mp3File.length() == 0) {
+            throw new IOException("文件不存在或为空");
         }
         File pcmFile = getTempFile("pcm");
         File silkFile = getTempFile("silk");
@@ -40,8 +40,8 @@ public class AudioUtils {
     }
 
     public static File silkToMp3(File silkFile) throws IOException {
-        if (!silkFile.exists()) {
-            throw new FileNotFoundException();
+        if (!silkFile.exists() || silkFile.length() == 0) {
+            throw new IOException("文件不存在或为空");
         }
         File pcmFile = getTempFile("pcm");
         File mp3File = getTempFile("mp3");

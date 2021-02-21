@@ -200,9 +200,9 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_encode
     fclose(speechInFile);
     fclose(bitOutFile);
 
-    filetime = totPackets * 1e-3 * packetSize_ms;
-    avg_rate = 8.0 / packetSize_ms * sumBytes / totPackets;
-    act_rate = 8.0 / packetSize_ms * sumActBytes / totActPackets;
+//    filetime = totPackets * 1e-3 * packetSize_ms;
+//    avg_rate = 8.0 / packetSize_ms * sumBytes / totPackets;
+//    act_rate = 8.0 / packetSize_ms * sumActBytes / totActPackets;
 //    if (!quiet) {
 //        printf("\nFile length:                    %.3f s", filetime);
 //        printf("\nTime for encoding:              %.3f s (%.3f%% of realtime)", 1e-6 * tottime,
