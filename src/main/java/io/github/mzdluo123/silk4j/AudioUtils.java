@@ -27,7 +27,7 @@ public class AudioUtils {
         File pcmFile = getTempFile("pcm");
         File silkFile = getTempFile("silk");
         int bitrate = LameCoder.decode(mp3File.getAbsolutePath(), pcmFile.getAbsolutePath());
-        SilkCoder.encode(pcmFile.getAbsolutePath(), silkFile.getAbsolutePath(), bitrate*1000);
+        SilkCoder.encode(pcmFile.getAbsolutePath(), silkFile.getAbsolutePath(), bitrate);
         pcmFile.delete();
         return silkFile;
     }

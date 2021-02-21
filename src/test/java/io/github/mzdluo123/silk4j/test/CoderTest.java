@@ -38,7 +38,7 @@ public class CoderTest {
 
     @Test
     public void testEncode() {
-        SilkCoder.encode("src/test/resources/out.pcm", "silk.amr", 0);
+        SilkCoder.encode("src/test/resources/out.pcm", "silk.amr", 16000);
         File outFile = new File("silk.amr");
         assertTrue(outFile.exists());
 
@@ -46,7 +46,7 @@ public class CoderTest {
 
     @Test
     public void testEncodeMp3() throws IOException {
-        LameCoder.encode("src/test/resources/out.pcm", "silk.mp3", 0);
+        LameCoder.encode("src/test/resources/out.pcm", "silk.mp3", 16000);
         File outFile = new File("silk.mp3");
         assertTrue(outFile.exists());
 
@@ -59,9 +59,9 @@ public class CoderTest {
         assertTrue(outFile.exists());
     }
 
-//    @Test
-//    public void testMp3ToSilk() throws IOException {
-//        File outFile = AudioUtils.mp3ToSilk(new File("src/test/resources/tts.mp3"));
-//        assertTrue(outFile.exists());
-//    }
+    @Test
+    public void testMp3ToSilk() throws IOException {
+        File outFile = AudioUtils.mp3ToSilk(new File("src/test/resources/tts.mp3"));
+        assertTrue(outFile.exists());
+    }
 }

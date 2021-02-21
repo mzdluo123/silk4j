@@ -283,7 +283,7 @@ JNIEXPORT jint JNICALL Java_io_github_mzdluo123_silk4j_LameCoder_decodeFile
 
     fclose(input_file);
     fclose(output_file);
-    return mp3data.bitrate;
+    return mp3data.samplerate;
 }
 
 

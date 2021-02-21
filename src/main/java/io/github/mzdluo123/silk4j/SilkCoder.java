@@ -11,30 +11,30 @@ public class SilkCoder {
 
 
     public static native void encode(String source,
-                              String dest,
-                              boolean tencent,
-                              int fs_Hz,
-                              int maxInternalSampleRate,
-                              int packetSize,
-                              int packetLossPercentage,
-                              int useInBandFEC,
-                              int useDTX,
-                              int complexity,
-                              int bitRate);
+                                     String dest,
+                                     boolean tencent,
+                                     int fs_Hz,
+                                     int maxInternalSampleRate,
+                                     int packetSize,
+                                     int packetLossPercentage,
+                                     int useInBandFEC,
+                                     int useDTX,
+                                     int complexity,
+                                     int bitRate);
 
     public static void encode(String source,
-                       String dest,int bitrate
+                              String dest, int sampleRate
     ) {
         encode(source,
                 dest, true,
+                sampleRate,
                 24000,
-                24000,
-                (20 * 24000) / 1000,
+                (20 * sampleRate) / 1000,
                 0,
                 0,
                 0,
                 2,
-                bitrate);
+                16000);
     }
 
 }

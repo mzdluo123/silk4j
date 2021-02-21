@@ -47,7 +47,7 @@ public class LameCoder {
                 .setInSampleRate(bitrate)
                 .setOutChannels(1)
                 .setOutBitrate(48)
-                .setOutSampleRate(bitrate)
+                .setOutSampleRate(24000)
                 .setQuality(8)
                 .build();
         encodeFile(source, dest);

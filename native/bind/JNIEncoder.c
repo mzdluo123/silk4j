@@ -32,7 +32,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_encode
 #endif
 
     /* default settings */
-    SKP_int32 API_fs_Hz = 24000;
+    SKP_int32 API_fs_Hz = fs_Hz;
     SKP_int32 max_internal_fs_Hz = 0;
     SKP_int32 targetRate_bps = 25000;
     SKP_int32 smplsSinceLastPacket, packetSize_ms = 20;
@@ -100,7 +100,7 @@ JNIEXPORT void JNICALL Java_io_github_mzdluo123_silk4j_SilkCoder_encode
     }
 
     /* Set Encoder parameters */
-    encControl.API_sampleRate = fs_Hz;
+    encControl.API_sampleRate = API_fs_Hz;
     encControl.maxInternalSampleRate = maxInternalSampleRate;
     encControl.packetSize = packetSize;
     encControl.packetLossPercentage = packetLossPercentage;
