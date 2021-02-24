@@ -2,9 +2,24 @@
 
 silkv3编码器的Java接口，为mirai相关生态提供语音编解码方案
 
-请到action页面下载AllInOne中的jar并导入你的项目即可开始使用
 
-# 使用方式
+# 导入依赖
+
+```
+
+repositories {
+   maven { url 'https://maven.pkg.github.com/mzdluo123/silk4j' }
+
+}
+dependencies {
+    implementation("io.github.mzdluo123:silk4j:版本号")
+}
+```
+版本号请到https://github.com/mzdluo123/silk4j/packages/ 查看
+
+你也可以到action页面下载AllInOne中的jar来开始使用
+
+# 使用
 
 ```java
 
