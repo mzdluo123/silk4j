@@ -10,6 +10,10 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    from sourceSets.main.output
+}
+
 publishing {
     repositories {
         maven {
@@ -23,8 +27,7 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
-            from(components.java)
-            artifact source: 'src/main/resources/*', classifier: 'features'
+            from(components["java"])
         }
     }
 }
