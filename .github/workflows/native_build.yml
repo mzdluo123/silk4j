@@ -4,8 +4,8 @@ name: Build Native
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags:
+      - v*
 
 jobs:
   test:
@@ -278,6 +278,8 @@ jobs:
           mv filelist.txt silk4j_libs
       - name: packJar
         run: chmod +x gradlew && ./gradlew jar
+      - name: upload
+        run: ./gradlew publish
       - name: Upload AllInOneJar
         uses: actions/upload-artifact@v2
         with:
