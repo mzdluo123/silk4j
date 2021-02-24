@@ -259,7 +259,7 @@ jobs:
       - build-android-x86
     runs-on: ubuntu-latest
     env:
-      GITHUBTOKEN: ${{ secret.GITHUBTOKEN }}
+      GITHUBTOKEN: ${{ secrets.GITHUBTOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 8
