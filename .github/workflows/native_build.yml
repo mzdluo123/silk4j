@@ -2,10 +2,8 @@
 name: Build Native
 
 on:
-  push:
-    branches: [ master ]
-    tags:
-      - v*
+  release:
+    types: [ created ]
 
 jobs:
   test:
