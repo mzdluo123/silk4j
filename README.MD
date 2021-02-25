@@ -8,7 +8,14 @@ silkv3编码器的Java接口，为mirai相关生态提供语音编解码方案
 ```
 
 repositories {
-   maven { url 'https://maven.pkg.github.com/mzdluo123/silk4j' }
+   maven { 
+    url 'https://maven.pkg.github.com/mzdluo123/silk4j'
+    // 我的GitHub package，请勿滥用
+    credentials {
+            username = 'mzdluo123'
+            password = 'eb3d236bcadf32bb92e96db313e930df31ee915d'
+        }
+   }
 
 }
 dependencies {
