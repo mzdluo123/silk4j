@@ -23,7 +23,9 @@ public class SilkCoder {
                                      int bitRate);
 
     public static void encode(String source,
-                              String dest, int sampleRate
+                              String dest,
+                              int sampleRate,
+                              int bitRate
     ) {
         encode(source,
                 dest, true,
@@ -34,7 +36,14 @@ public class SilkCoder {
                 0,
                 0,
                 2,
-                16000);
+                bitRate);
+    }
+
+    public static void encode(String source,
+                              String dest,
+                              int sampleRate
+    ){
+        encode(source, dest, sampleRate, 24000);
     }
 
 }
