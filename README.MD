@@ -6,12 +6,15 @@ silkv3编码器的Java接口，为mirai相关生态提供语音编解码方案
 # 导入依赖
 
 ```
-
+// 要使用maven仓库导入，需要先为你的账号生成一个访问token才能正常拉取
 repositories {
    maven { 
-    url 'https://maven.pkg.github.com/mzdluo123/silk4j'
+     url 'https://maven.pkg.github.com/mzdluo123/silk4j'
+     credentials {
+            username = '你的用户名'
+            password = '你的token'
+        }
    }
-
 }
 dependencies {
     implementation("io.github.mzdluo123:silk4j:版本号")
