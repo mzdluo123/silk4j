@@ -3,7 +3,9 @@ name: Build Native
 
 on:
   release:
-    types: [ created ]
+    types:
+      - released
+      - prereleased
 
 jobs:
   test:
