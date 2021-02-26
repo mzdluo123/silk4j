@@ -2,6 +2,10 @@
 name: Build Native
 
 on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*-dev*'
   release:
     types:
       - released
