@@ -2,8 +2,14 @@
 name: Build Native
 
 on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*-dev*'
   release:
-    types: [ created ]
+    types:
+      - released
+      - prereleased
 
 jobs:
   test:
