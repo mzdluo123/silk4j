@@ -77,7 +77,29 @@ jobs:
           name: android-arm64
           path: |
             native/cmake-build-debug/Release
-
+  build-android-arm:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - name: Add Permission
+        run: chmod +x cross/setup_docker.sh &&  chmod +x cross/build.sh
+      - name: Generate Headers
+        run: chmod +x gradlew && ./gradlew compileJava
+      - name: Build
+        env:
+          CROSS: android-arm
+        run: cross/setup_docker.sh
+      - name: Archive NativeLib artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-arm
+          path: |
+            native/cmake-build-debug/Release
   build-linux-arm:
     needs: test
     runs-on: ubuntu-latest
@@ -255,6 +277,7 @@ jobs:
       - build-windows-shared-x86
       - build-macos-latest
       - build-android-x86
+      - build-android-arm
     runs-on: ubuntu-latest
     env:
       GITHUBTOKEN: ${{ secrets.GITHUBTOKEN }}
